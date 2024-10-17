@@ -11,11 +11,12 @@ public final class ArrayFunctions {
      */
 
     public static void reverse(int[] array) {
-        for( int i = 0; i <= array.length / 2; i++)
+        int l = array.length;
+        for( int i = 0; i < l / 2; i++)
         {
            int o = array[i];
-           array[i] = array[array.length - 1 - i];
-           array[array.length - 1 - i] = o;
+           array[i] = array[l - 1 - i];
+           array[l - 1 - i] = o;
         }
         // TODO: реализуйте вышеуказанную функцию
 
@@ -32,14 +33,15 @@ public final class ArrayFunctions {
      * @param matrix матрица, в которой столбцы будут заменены на строки.
      */
     public static void rotateMatrix(int[][] matrix) {
-        if(matrix.length != matrix[0].length)
+        int m = matrix.length;
+        int n = matrix[0].length;
+        if(n != m)
         {
             System.out.println("You are stupid!!!!!!");
         }
-        int n = matrix.length;
-        for(int i = 0; i <= n / 2; i++)
+        for(int i = 0; i < n; i++)
         {
-            for (int j = 0; j <= n / 2; j++)
+            for (int j = 0; j < n; j++)
             {
                 int o = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
