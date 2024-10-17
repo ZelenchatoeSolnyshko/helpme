@@ -72,6 +72,24 @@ public final class Elevator {
      */
     public void goToExactFloor(int floor) {
        // TODO: реализуйте вышеуказанную функцию
+        if (floor > highestFloor || floor < lowestFloor)
+        {
+            System.out.println("You are stupid!!!!");
+        }
+        else {
+            while(currentFloor != floor)
+            {
+                System.out.println("This floor:" + currentFloor);
+                if(currentFloor > floor)
+                {
+                    goDown();
+                }
+                if(currentFloor < floor)
+                {
+                    goUp();
+                }
+            }
+        }
     }
 
     /**
