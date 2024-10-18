@@ -38,10 +38,11 @@ public final class ArrayFunctions {
         if(n != m)
         {
             System.out.println("You are stupid!!!!!!");
+            return;
         }
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < m; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = i + 1; j < m; j++)
             {
                 int o = matrix[i][j];
                 matrix[i][j] = matrix[j][i];

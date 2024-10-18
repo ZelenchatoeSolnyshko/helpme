@@ -38,6 +38,7 @@ public final class Elevator {
      * Спускает лифт на этаж ниже.
      */
     private void goDown() {
+
         currentFloor--;
     }
 
@@ -74,22 +75,22 @@ public final class Elevator {
        // TODO: реализуйте вышеуказанную функцию
         if (floor > highestFloor || floor < lowestFloor)
         {
-            System.out.println("You are stupid!!!!");
+            System.out.println("Указан неверный этаж");
+            return;
         }
-        else {
-            while(currentFloor != floor)
-            {
-                System.out.println("This floor:" + currentFloor);
+        while(currentFloor != floor)
+        {
+                System.out.println("Текущий этаж: " + currentFloor);
                 if(currentFloor > floor)
                 {
                     goDown();
                 }
-                if(currentFloor < floor)
+                else if(currentFloor < floor)
                 {
                     goUp();
                 }
-            }
         }
+        System.out.println("Вы достигли указанного этажа: " + currentFloor);
     }
 
     /**
@@ -98,6 +99,7 @@ public final class Elevator {
      * @return текущий этаж
      */
     public int getCurrentFloor() {
+
         return currentFloor;
     }
 }
