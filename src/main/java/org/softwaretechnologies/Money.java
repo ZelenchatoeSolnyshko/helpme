@@ -27,8 +27,21 @@ public class Money {
     @Override
     public boolean equals(Object o) {
         // TODO: реализуйте вышеуказанную функцию
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass() {
+            return false;
+        }
+        if (type != money.type) {
+            return false;
+        }
+        BigDecimal first = (amount == null) ? BigDecimal.ZERO : amount.setScale(4, RoundingMode.HALF_UP);
+        BigDecimal second = (money.amount == null) ? BigDecimal.ZERO : money.amount.setScale(4, RoundingMode.HALF_UP);
 
-        return false;
+        return first.equals(second);
+
+
     }
 
     /**
@@ -49,10 +62,25 @@ public class Money {
     @Override
     public int hashCode() {
         // TODO: реализуйте вышеуказанную функцию
-
-
-        Random random = new Random();
-        return random.nextInt();
+        if(this.amount == null) {
+            return 10000;
+        }
+        BigDecimal money = this.amount.setScale(4,RoundingMode.HALF_UP);
+        BigDecimal moneyMaxValue;
+        moneyMaxValue = money.multiply(BigDecimal.valueOf(10_000));
+        money = money.multiply(BigDecimal.valueOf(10_000));
+        switch (type){
+            case USD -> money = money.multiply(BigDecimal.valueOf(1));
+            case EURO -> money = money.multiply(BigDecimal.valueOf(2));
+            case RUB -> money = money.multiply(BigDecimal.valueOf(3));
+            case KRONA -> money = money.multiply(BigDecimal.valueOf(4));
+            default -> money = money.multiply(BigDecimal.valueOf(5));
+        }
+        int res = moneyMaxValue.compareTo(BigDecimal.valueOf(MAX_VALUE-5));
+        if(res > 0 || res == 0){
+            return MAX_VALUE;
+        }
+        return  money.intValue();
     }
 
     /**
@@ -75,8 +103,16 @@ public class Money {
     @Override
     public String toString() {
         // TODO: реализуйте вышеуказанную функцию
-        String str = type.toString()+": "+amount.setScale(4, RoundingMode.HALF_UP).toString();
-        return str;
+        if(type == null && amount == null){
+            return "null: null";
+        }
+        if(type == null){
+            return "null: " + amount.setScale(4, RoundingMode.HALF_UP);
+        }
+        if(amount == null){
+            return type + ": null";
+        }
+        return type+": "+amount.setScale(4,RoundingMode.HALF_UP);
     }
 
     public BigDecimal getAmount() {
@@ -95,3 +131,45 @@ public class Money {
         System.out.println(money.equals(money1));
     }
 }
+
+/*if(this == o) return true;//если один и тоже объект
+        if(o == null || getClass() != o.getClass())return false;//проверка является ли объект экземпляром класса Money
+
+        Money object = (Money) o;//поняли, что объект это экземпляр Money и привели тип
+
+        //округляем в большую или в меньшую сторону
+        BigDecimal thisMoney = this.amount.setScale(4,RoundingMode.HALF_UP);
+        BigDecimal objectMoney = object.amount.setScale(4,RoundingMode.HALF_UP);
+
+        return thisMoney.equals(objectMoney) && this.type == object.type;
+
+
+        if(this.amount == null)return 10000;
+
+        BigDecimal money = this.amount.setScale(4,RoundingMode.HALF_UP);
+        BigDecimal moneyMaxValue;
+
+        moneyMaxValue = money.multiply(BigDecimal.valueOf(10_000));
+        money = money.multiply(BigDecimal.valueOf(10_000));
+        switch (type){
+            case RUB -> money = money.multiply(BigDecimal.valueOf(3));
+            case USD -> money = money.multiply(BigDecimal.valueOf(1));
+            case EURO -> money = money.multiply(BigDecimal.valueOf(2));
+            case KRONA -> money = money.multiply(BigDecimal.valueOf(4));
+            default -> money = money.multiply(BigDecimal.valueOf(5));
+        }
+
+
+        int res = moneyMaxValue.compareTo(BigDecimal.valueOf(MAX_VALUE-5));
+        if(res > 0 || res == 0){
+            return MAX_VALUE;
+        }
+
+        return  money.intValue();
+
+
+    }
+
+
+    }
+*/
