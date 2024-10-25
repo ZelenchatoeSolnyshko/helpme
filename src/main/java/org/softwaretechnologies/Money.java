@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 import static java.lang.Integer.MAX_VALUE;
+import static org.softwaretechnologies.MoneyType.*;
 
 public class Money {
     private final MoneyType type;
@@ -70,14 +71,14 @@ public class Money {
 
         int typeHash;
 
-        if (type == MoneyType.USD){
+        if (USD.equals(type)){
             typeHash = 1;
         }
-        else if (type == MoneyType.EURO){
+        else if (EURO.equals(type)){
             typeHash = 2;
-        } else if (type == MoneyType.RUB) {
+        } else if (RUB.equals(type)) {
             typeHash = 3;
-        } else if (type == MoneyType.KRONA) {
+        } else if (KRONA.equals(type)) {
             typeHash = 4;
         } else {
             typeHash = 5;
@@ -134,8 +135,8 @@ public class Money {
     }
 
     public static void main(String[] args) {
-        Money money = new Money(MoneyType.EURO, BigDecimal.valueOf(10.00012));
-        Money money1 = new Money(MoneyType.USD, BigDecimal.valueOf(10.5000));
+        Money money = new Money(EURO, BigDecimal.valueOf(10.00012));
+        Money money1 = new Money(USD, BigDecimal.valueOf(10.5000));
         System.out.println(money1.toString());
         System.out.println(money1.hashCode());
         System.out.println(money.equals(money1));
