@@ -30,16 +30,17 @@ public class Money {
         if(this == o) {
             return true;
         }
-        if(o == null || getClass() != o.getClass() {
+        if(o == null || getClass() != o.getClass()) {
             return false;
         }
+        Money money = (Money) o;
         if (type != money.type) {
             return false;
         }
-        BigDecimal first = (amount == null) ? BigDecimal.ZERO : amount.setScale(4, RoundingMode.HALF_UP);
-        BigDecimal second = (money.amount == null) ? BigDecimal.ZERO : money.amount.setScale(4, RoundingMode.HALF_UP);
+        BigDecimal scaledAmount = (amount!= null )? amount.setScale(4, RoundingMode.HALF_UP) : BigDecimal.ZERO;
+        BigDecimal otherScaledAmount = (money.amount != null) ?  money.amount.setScale(4, RoundingMode.HALF_UP): BigDecimal.ZERO;
 
-        return first.equals(second);
+        return scaledAmount.equals(otherScaledAmount);
 
 
     }
@@ -62,25 +63,34 @@ public class Money {
     @Override
     public int hashCode() {
         // TODO: реализуйте вышеуказанную функцию
-        if(this.amount == null) {
-            return 10000;
+        BigDecimal scaledAmount = (amount == null ) ? BigDecimal.valueOf(10000) : amount.setScale(4 , RoundingMode.HALF_UP);
+
+
+        int scaledAmountHash = scaledAmount.multiply(BigDecimal.valueOf(10000)).intValue();
+
+        int typeHash;
+
+        if (type == MoneyType.USD){
+            typeHash = 1;
         }
-        BigDecimal money = this.amount.setScale(4,RoundingMode.HALF_UP);
-        BigDecimal moneyMaxValue;
-        moneyMaxValue = money.multiply(BigDecimal.valueOf(10_000));
-        money = money.multiply(BigDecimal.valueOf(10_000));
-        switch (type){
-            case USD -> money = money.multiply(BigDecimal.valueOf(1));
-            case EURO -> money = money.multiply(BigDecimal.valueOf(2));
-            case RUB -> money = money.multiply(BigDecimal.valueOf(3));
-            case KRONA -> money = money.multiply(BigDecimal.valueOf(4));
-            default -> money = money.multiply(BigDecimal.valueOf(5));
+        else if (type == MoneyType.EURO){
+            typeHash = 2;
+        } else if (type == MoneyType.RUB) {
+            typeHash = 3;
+        } else if (type == MoneyType.KRONA) {
+            typeHash = 4;
+        } else {
+            typeHash = 5;
         }
-        int res = moneyMaxValue.compareTo(BigDecimal.valueOf(MAX_VALUE-5));
-        if(res > 0 || res == 0){
-            return MAX_VALUE;
+
+        int hash = scaledAmountHash + typeHash;
+
+        if (hash >= MAX_VALUE -5){
+            return MAX_VALUE ;
         }
-        return  money.intValue();
+        else {
+            return hash;
+        }
     }
 
     /**
