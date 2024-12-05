@@ -17,16 +17,15 @@ public class Company {
     }
 
     public void addEmployee(String name, int baseSalary, EmployeeType type) {
-        employeeList.add(EmployeeFactory.create(name, baseSalary,type));
+        employeeList.add(EmployeeFactory.createEmployee(name, baseSalary, type));
     }
 
     public int getMonthSalary(int month) {
-        int sum = 0;
+        int summ = 0;
         for (Employee e:employeeList){
-            sum += e.getMonthSalary(month);
+            summ += e.getMonthSalary(month);
         }
-
-        return sum;
+        return summ;
     }
 
     public String getName() {
