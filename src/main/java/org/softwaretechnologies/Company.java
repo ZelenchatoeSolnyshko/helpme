@@ -3,6 +3,7 @@ package org.softwaretechnologies;
 import org.softwaretechnologies.employee.Employee;
 import org.softwaretechnologies.employee.EmployeeType;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Company {
     }
 
     public void addEmployee(String name, int baseSalary, EmployeeType type) {
-        employeeList.add(EmployeeFactory.createEmployee(name, baseSalary,type));
+        employeeList.add(EmployeeFactory.create(name, baseSalary,type));
     }
 
     public int getMonthSalary(int month) {

@@ -46,7 +46,7 @@ public class EmployeeFactory {
         }
 
 
-        public static Employee createEmployee(String name, int baseSalary, EmployeeType type) {
+        public static Employee create(String name, int baseSalary, EmployeeType type) {
             return switch (type) {
                 case Manager -> new Manager(name, baseSalary);
                 case Programmer -> new Programmer(name, baseSalary);
